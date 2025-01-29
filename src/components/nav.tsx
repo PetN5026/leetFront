@@ -6,7 +6,7 @@ export function NavBar() {
       <ul className="flex flex-row justify-start">
         <li className="px-4">
           <a className="underline">
-            <NavLink to={"/home"}>
+            <NavLink to={"/"}>
               <i className="fa-solid fa-fw fa-home"></i>
               Home
             </NavLink>
