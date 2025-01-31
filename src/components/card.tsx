@@ -15,8 +15,6 @@ export function Test() {
   async function fetchDailyQuestion(date: string) {
     try {
       const response = await fetch(`${new_API}/leet/git/${date}`);
-      // console.log(process.env.URI);
-      // https://bright-lokum-76261b.netlify.app/.netlify/functions/api/
 
       const data = await response.json();
 
@@ -34,8 +32,9 @@ export function Test() {
         {/* </div> */}
         <div className="card bg-base-100  m-4 max-w-sm shrink-0 rounded-md bg-blue-200 shadow-md shadow-black">
           <form className="card-body">
-            <p className="py-6">
-              Select a date and get the leetcode daily for that day.
+            <p className="py-6 text-left">
+              Select a date and get the leetcode daily for that day. Click the
+              underlined name to go straight there.
             </p>
             <div className="form-control mt-6">
               <DatePicker
@@ -119,11 +118,25 @@ export function Test() {
             <div className="flex justify-between items-center"></div>
 
             <div className="flex flex-col gap-2">
-              <a className="text-xl font-bold">{questionObj.title}</a>
+              <a
+                href={`https://www.leetcode.com/problems/${questionObj.titleSlug}`}
+                className="text-xl font-bold underline"
+              >
+                {questionObj.title}
+              </a>
               <a className="text-xl font-bold">{questionObj.titleSlug}</a>
-              <a className="text-xl font-bold">{questionObj.date}</a>
+              <a className="text-xl font-bold">
+                {questionObj.date.split("T")[0]}
+              </a>
               <a className="text-xl font-bold">{questionObj.difficulty}</a>
-              <a className="text-xl font-bold">{questionObj.gitstring}</a>
+              <a
+                onClick={() => {
+                  navigator.clipboard.writeText(questionObj.gitstring);
+                }}
+                className="text-xl font-bold"
+              >
+                {questionObj.gitstring}
+              </a>
             </div>
 
             <div className="flex justify-between items-center"></div>
